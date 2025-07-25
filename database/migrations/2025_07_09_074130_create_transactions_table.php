@@ -19,10 +19,6 @@ return new class extends Migration
             $table->decimal('commission', 15, 2)->default(0.00);
 
             // Foreign key relationships
-            $table->foreignId('category_id')
-                  ->constrained('categories')
-                  ->onDelete('restrict'); // Prevent deletion of categories with transactions
-
             $table->foreignId('user_id')
                   ->constrained('users')
                   ->onDelete('cascade'); // Delete transactions when user is deleted

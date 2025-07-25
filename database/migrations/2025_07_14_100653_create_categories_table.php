@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->foreignId('parent_id')->nullable()->constrained('categories')->onDelete('restrict');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

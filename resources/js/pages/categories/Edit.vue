@@ -9,29 +9,36 @@ interface Props {
         id: number;
         title: string;
     }>;
+    category: {
+        id: number;
+        title: string;
+        type: CategoryType;
+        parent_id: number | null;
+        is_active: boolean;
+    };
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Categories', href: '/categories' },
-    { title: 'Create Category', href: '#' },
+    { title: 'Edit Category', href: '#' },
 ];
 
 const form = useForm({
-    title: '',
-    type: CategoryType.EXPENSE,
-    parent_id: null as number | null,
-    is_active: true as boolean,
+    title: props.category.title,
+    type: props.category.type,
+    parent_id: props.category.parent_id,
+    is_active: props.category.is_active,
 });
 
 const submit = () => {
-    form.post(route('categories.store'));
+    form.put(route('categories.update', { category: props.category.id }));
 };
 </script>
 
 <template>
-    <Head title="Create Category" />
+    <Head title="Edit Category" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="mx-auto mt-8 min-w-md p-6">
@@ -196,7 +203,7 @@ const submit = () => {
                             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                         ></path>
                     </svg>
-                    {{ form.processing ? 'Creating...' : 'Create Category' }}
+                    {{ form.processing ? 'Updating...' : 'Update Category' }}
                 </button>
             </form>
         </div>

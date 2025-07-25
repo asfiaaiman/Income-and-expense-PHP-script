@@ -36,3 +36,5 @@ export interface User {
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;
+
+export { CategoryType } from './CategoryType';

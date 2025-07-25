@@ -1,5 +1,10 @@
 import { AppPageProps } from '@/types/index';
 
+// Global route function from Ziggy
+declare global {
+    function route(name: string, params?: Record<string, unknown>): string;
+}
+
 // Extend ImportMeta interface for Vite...
 declare module 'vite/client' {
     interface ImportMetaEnv {
@@ -22,5 +27,6 @@ declare module 'vue' {
         $inertia: typeof Router;
         $page: Page;
         $headManager: ReturnType<typeof createHeadManager>;
+        route: (name: string, params?: Record<string, unknown>) => string;
     }
 }
