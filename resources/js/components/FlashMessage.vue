@@ -3,13 +3,6 @@ import { useGlobalToast } from '@/composables/useGlobalToast'
 import { usePage } from '@inertiajs/vue3'
 import { watch } from 'vue'
 
-interface FlashMessages {
-  success?: string
-  error?: string
-  warning?: string
-  info?: string
-}
-
 const page = usePage()
 const { toast } = useGlobalToast()
 
@@ -70,5 +63,5 @@ watch(
 </script>
 
 <template>
-  <!-- This component doesn't render anything, it just handles flash messages -->
+  <div></div>
 </template>

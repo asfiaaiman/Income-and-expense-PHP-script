@@ -122,7 +122,7 @@ const submit = () => {
                                    focus:ring-2 focus:ring-indigo-600 sm:text-sm"
                         >
                             <option :value="null">No parent category</option>
-                            <option v-for="category in categories" :value="category.id">
+                            <option v-for="category in categories" :key="category.id" :value="category.id">
                                 {{ category.title }}
                             </option>
                         </select>

@@ -41,7 +41,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 const showDeleteDialog = ref(false);
 const categoryToDelete = ref<{ id: number; title: string } | null>(null);
 
-const { toast } = useGlobalToast();
+// Toast functionality is handled by FlashMessage component
 
 // Open delete confirmation dialog
 const openDeleteDialog = (category: { id: number; title: string }) => {
