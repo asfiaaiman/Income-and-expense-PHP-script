@@ -14,18 +14,18 @@ A comprehensive Laravel-based web application for managing personal or business 
 
 ## Technology Stack
 
-- **Backend**: Laravel 11 (PHP 8.2+)
+- **Backend**: Laravel 12 (PHP 8.4+)
 - **Frontend**: Vue.js 3 with Inertia.js
 - **Styling**: Tailwind CSS
-- **Database**: MySQL/PostgreSQL/SQLite
+- **Database**: MySQL
 - **Authentication**: Laravel Breeze with Inertia
 
 ## Requirements
 
-- PHP 8.2 or higher
+- PHP 8.4 or higher
 - Composer
 - Node.js and npm
-- Database (MySQL, PostgreSQL, or SQLite)
+- MySQL database
 
 ## Installation
 
@@ -159,6 +159,10 @@ This project is open-sourced software licensed under the [MIT license](https://o
 ## Support
 
 For support, please open an issue in the repository or contact the development team.
+
+## Credits
+
+This project was inspired by the project ideas shared by [Povilas Korop](https://laraveldaily.com/project-ideas/9) on [Laravel Daily](https://laraveldaily.com/). The original project idea for an income and expense management system can be found at [Laravel Daily Project Ideas](https://laraveldaily.com/project-ideas/9).
 
 ## Changelog
 
