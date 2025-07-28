@@ -104,6 +104,18 @@ const formatCurrency = (amount: number) => {
     }).format(amount);
 };
 
+// Format date
+const formatDate = (dateString: string) => {
+    if (!dateString) return '';
+
+    const date = new Date(dateString);
+    return new Intl.DateTimeFormat('en-US', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+    }).format(date);
+};
+
 // Format percentage
 const formatPercentage = (value: number, total: number) => {
     if (total === 0) return '0%';
@@ -138,15 +150,34 @@ const netAmountClass = computed(() =>
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                             Report Period
                         </label>
-                        <select
-                            v-model="filterForm.period"
-                            @change="applyFilters"
-                            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
-                        >
-                            <option v-for="period in periods" :key="period.value" :value="period.value">
-                                {{ period.label }}
-                            </option>
-                        </select>
+                        <div class="relative">
+                            <select
+                                v-model="filterForm.period"
+                                @change="applyFilters"
+                                class="block w-full appearance-none rounded-md border-0 bg-white dark:bg-gray-700 px-3 py-2.5 pr-10
+                                       text-gray-900 dark:text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:outline-none
+                                       focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 sm:text-sm
+                                       transition-all duration-200 hover:ring-gray-400 dark:hover:ring-gray-500"
+                            >
+                                <option v-for="period in periods" :key="period.value" :value="period.value">
+                                    {{ period.label }}
+                                </option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                                <svg
+                                    class="h-5 w-5 text-gray-400 dark:text-gray-500 transition-colors duration-200"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Custom Date Range -->
@@ -158,7 +189,10 @@ const netAmountClass = computed(() =>
                             <input
                                 v-model="filterForm.start_date"
                                 type="date"
-                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
+                                class="block w-full rounded-md border-0 bg-white dark:bg-gray-700 px-3 py-2.5
+                                       text-gray-900 dark:text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:outline-none
+                                       focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 sm:text-sm
+                                       transition-all duration-200 hover:ring-gray-400 dark:hover:ring-gray-500"
                             />
                         </div>
                         <div>
@@ -168,13 +202,18 @@ const netAmountClass = computed(() =>
                             <input
                                 v-model="filterForm.end_date"
                                 type="date"
-                                class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
+                                class="block w-full rounded-md border-0 bg-white dark:bg-gray-700 px-3 py-2.5
+                                       text-gray-900 dark:text-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:outline-none
+                                       focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400 sm:text-sm
+                                       transition-all duration-200 hover:ring-gray-400 dark:hover:ring-gray-500"
                             />
                         </div>
                         <div class="flex items-end">
                             <button
                                 @click="applyFilters"
-                                class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                class="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-4 py-2.5 rounded-md
+                                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800
+                                       transition-all duration-200 font-medium text-sm shadow-sm hover:shadow-md"
                             >
                                 Apply
                             </button>
@@ -398,7 +437,7 @@ const netAmountClass = computed(() =>
                         <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                             <tr v-for="trend in trends" :key="trend.date || trend.week || trend.month || trend.year">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
-                                    {{ trend.date || trend.week || trend.month || trend.year }}
+                                    {{ trend.date ? formatDate(trend.date) : (trend.week || trend.month || trend.year) }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600 dark:text-green-400">
                                     {{ formatCurrency(trend.income) }}
